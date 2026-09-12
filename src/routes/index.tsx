@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   Activity, Bell, BookOpen, Brain, CalendarDays, ChevronDown, CircleDollarSign,
   Clock3, FileText, Gauge, LayoutDashboard, LineChart, Newspaper, Send, Settings2,
@@ -67,7 +67,7 @@ function Dashboard() {
   return <main className="app-shell">
     <aside className="sidebar">
       <div className="brand"><span className="brand-mark">H</span><b>HybridTrader</b></div>
-      <nav>{nav.map(([Icon,label],i)=><button key={label} className={`nav-item ${i===0?"active":""}`} title={label}><Icon/><span>{label}</span></button>)}</nav>
+      <nav>{nav.map(([Icon,label],i)=>label === "Macro Desk" ? <Link key={label} to="/macro-desk" className="nav-item" title={label}><Icon/><span>{label}</span></Link> : <button key={label} className={`nav-item ${i===0?"active":""}`} title={label}><Icon/><span>{label}</span></button>)}</nav>
     </aside>
 
     <div className="workspace">
