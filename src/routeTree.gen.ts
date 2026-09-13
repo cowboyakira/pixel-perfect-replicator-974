@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MacroDeskRouteImport } from './routes/macro-desk'
+import { Route as AssetSymbolRouteImport } from './routes/asset.$symbol'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const MacroDeskRoute = MacroDeskRouteImport.update({
   path: '/macro-desk',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AssetSymbolRoute = AssetSymbolRouteImport.update({
+  id: '/asset/$symbol',
+  path: '/asset/$symbol',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/macro-desk': typeof MacroDeskRoute
+  '/asset/$symbol': typeof AssetSymbolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/macro-desk': typeof MacroDeskRoute
+  '/asset/$symbol': typeof AssetSymbolRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/macro-desk': typeof MacroDeskRoute
+  '/asset/$symbol': typeof AssetSymbolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/macro-desk'
+  fullPaths: '/' | '/macro-desk' | '/asset/$symbol'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/macro-desk'
-  id: '__root__' | '/' | '/macro-desk'
+  to: '/' | '/macro-desk' | '/asset/$symbol'
+  id: '__root__' | '/' | '/macro-desk' | '/asset/$symbol'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MacroDeskRoute: typeof MacroDeskRoute
+  AssetSymbolRoute: typeof AssetSymbolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MacroDeskRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/asset/$symbol': {
+      id: '/asset/$symbol'
+      path: '/asset/$symbol'
+      fullPath: '/asset/$symbol'
+      preLoaderRoute: typeof AssetSymbolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MacroDeskRoute: MacroDeskRoute,
+  AssetSymbolRoute: AssetSymbolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

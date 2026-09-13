@@ -84,7 +84,7 @@ function MacroDesk() {
                   <div className="macro-confidence"><span>Confidence</span><strong>{asset.confidence}%</strong><div><i style={{ width: `${asset.confidence}%` }}/></div></div>
                   <p className="last-update">⟳ Last update: {asset.updated}</p>
                   <div className="macro-analysis"><strong>◇ AI Analysis</strong><p>{asset.summary}.. <a href="#details">Read more</a></p></div>
-                  <div className="macro-actions"><button onClick={() => setExpanded((current) => ({ ...current, [asset.symbol]: !isOpen }))}>Quick Overview &nbsp; {isOpen ? <ChevronUp size={10}/> : <ChevronDown size={10}/>}</button><button>Deep Dive &nbsp; ↗</button></div>
+                  <div className="macro-actions"><button onClick={() => setExpanded((current) => ({ ...current, [asset.symbol]: !isOpen }))}>Quick Overview &nbsp; {isOpen ? <ChevronUp size={10}/> : <ChevronDown size={10}/>}</button><Link to="/asset/$symbol" params={{ symbol: asset.symbol }} className="deep-dive-link">Deep Dive &nbsp; ↗</Link></div>
                   {isOpen && <div className="macro-details" id="details">
                     <ul>{asset.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
                     <div className="accuracy"><span>Model accuracy (30 days)</span><b>0%</b></div>
