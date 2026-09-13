@@ -41,10 +41,12 @@ const miniTickers = [
 ];
 
 const sessions = [
-  { label: "Sydney", left: 5, width: 12, muted: true },
-  { label: "Tokyo", left: 5, width: 16, muted: true },
+  { label: "Sydney", left: 5, width: 12, named: false },
+  { label: "Tokyo", left: 5, width: 16, named: false },
   { label: "London", left: 20, width: 37, named: true },
-  { label: "New York", left: 42, width: 38, named: true },
+  { label: "New York", left: 30, width: 38, named: true },
+  { label: "Sydney ", left: 62, width: 13, named: true },
+  { label: "Tokyo ", left: 68, width: 11, named: true },
 ];
 
 const upPath = "M0 34 L8 30 L16 33 L24 24 L32 27 L40 18 L48 22 L56 10 L64 14 L72 8 L80 12 L88 6 L100 9";
@@ -231,16 +233,14 @@ function AssetDeepDive() {
             <div className="deep-panel">
               <div className="panel-line big"><h2>Market Sessions</h2><em>GMT-3 Timezone</em></div>
               <div className="sessions-chart">
-                <div className="hours">{["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "00:00"].map((h) => <span key={h}>{h}</span>)}</div>
+                <div className="hours">{["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "24:00"].map((h) => <span key={h}>{h === "24:00" ? "00:00" : h}</span>)}</div>
                 <div className="now-line"><i/><b>01:09 PM</b></div>
                 {sessions.map((s) => (
                   <div className="session-row" key={s.label}>
-                    <span className="session-bar" style={{ marginLeft: `${s.left}%`, width: `${s.width}%` }}>{s.named ? s.label : ""}</span>
-                    {s.named ? <small>CLOSED</small> : <small className="right-note">CLOSED</small>}
+                    <span className="session-bar" style={{ marginLeft: `${s.left}%`, width: `${s.width}%` }}>{s.named ? s.label.trim() : ""}</span>
+                    <small style={{ marginLeft: `${s.left}%` }}>CLOSED</small>
                   </div>
                 ))}
-                <div className="session-row"><span className="session-bar named-right" style={{ marginLeft: "62%", width: "13%" }}>Sydney</span><small>CLOSED</small></div>
-                <div className="session-row"><span className="session-bar named-right" style={{ marginLeft: "68%", width: "11%" }}>Tokyo</span><small>CLOSED</small></div>
               </div>
             </div>
 
